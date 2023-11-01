@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.mealicious.ui.navigation.Destinations
 import com.example.mealicious.ui.navigation.Destinations.MEALS_BY_CATEGORY_ROUTE
 import com.example.mealicious.ui.theme.mustard
 import com.example.mealicious.ui.widget.CategoryItemView
@@ -46,7 +47,12 @@ fun CategoryScreen(
             SearchBarView(
                 modifier = Modifier.padding(top = 16.dp),
                 onSearch = {
-
+                    navController.navigate(
+                        "${Destinations.SEARCH_MEALS_ROUTE}/{name}".replace(
+                            oldValue = "{name}",
+                            newValue = it
+                        )
+                    )
                 }
             )
             if (state.value.isLoading) {

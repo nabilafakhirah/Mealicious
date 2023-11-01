@@ -20,6 +20,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.mealicious.R
+import com.example.mealicious.ui.navigation.Destinations
 import com.example.mealicious.ui.navigation.Destinations.AREA_LIST_ROUTE
 import com.example.mealicious.ui.navigation.Destinations.CATEGORY_LIST_ROUTE
 import com.example.mealicious.ui.theme.Typography
@@ -43,7 +44,12 @@ fun HomeScreen(
         SearchBarView(
             modifier = Modifier.padding(top = 16.dp),
             onSearch = {
-
+                navController.navigate(
+                    "${Destinations.SEARCH_MEALS_ROUTE}/{name}".replace(
+                        oldValue = "{name}",
+                        newValue = it
+                    )
+                )
             }
         )
         Row(

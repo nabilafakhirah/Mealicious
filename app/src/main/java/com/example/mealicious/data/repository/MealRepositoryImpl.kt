@@ -110,7 +110,7 @@ class MealRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun searchMeals(name: String): Flow<DataResult<MealDetailResponse>> = flow {
+    override fun searchMeals(name: String): Flow<DataResult<MealsResponse>> = flow {
         try {
             emit(DataResult.Loading())
             val result = mealApi.searchMeals(name)

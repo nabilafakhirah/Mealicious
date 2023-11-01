@@ -36,5 +36,5 @@ interface MealApi {
     @GET("search.php")
     suspend fun searchMeals(
         @Query("s") name: String,
-    ): MealDetailResponse
+    ): MealsResponse
 }

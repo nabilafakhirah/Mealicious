@@ -18,5 +18,5 @@ interface MealRepository {
 
     fun getMealsByArea(area: String): Flow<DataResult<MealsResponse>>
 
-    fun searchMeals(name: String): Flow<DataResult<MealDetailResponse>>
+    fun searchMeals(name: String): Flow<DataResult<MealsResponse>>
 }

@@ -9,11 +9,13 @@ import com.example.mealicious.ui.navigation.Destinations.CATEGORY_LIST_ROUTE
 import com.example.mealicious.ui.navigation.Destinations.MEALS_BY_AREA_ROUTE
 import com.example.mealicious.ui.navigation.Destinations.MEALS_BY_CATEGORY_ROUTE
 import com.example.mealicious.ui.navigation.Destinations.RECIPE_HOME_ROUTE
+import com.example.mealicious.ui.navigation.Destinations.SEARCH_MEALS_ROUTE
 import com.example.mealicious.ui.screens.area.AreaScreen
 import com.example.mealicious.ui.screens.category.CategoryScreen
 import com.example.mealicious.ui.screens.home.HomeScreen
 import com.example.mealicious.ui.screens.mealsbyarea.MealsByAreaScreen
 import com.example.mealicious.ui.screens.mealsbycategory.MealsByCategoryScreen
+import com.example.mealicious.ui.screens.search.SearchMealScreen
 
 @Composable
 fun NavGraph(
@@ -48,6 +50,13 @@ fun NavGraph(
                 navController = navController
             )
         }
+        composable("${SEARCH_MEALS_ROUTE}/{name}") {
+            val name = it.arguments?.getString("name") ?: ""
+            SearchMealScreen(
+                name = name,
+                navController = navController
+            )
+        }
     }
 
 }
@@ -59,4 +68,5 @@ object Destinations {
     const val CATEGORY_LIST_ROUTE = "category_list_route"
     const val MEALS_BY_AREA_ROUTE = "meals_by_area_route"
     const val MEALS_BY_CATEGORY_ROUTE = "meals_by_category_route"
+    const val SEARCH_MEALS_ROUTE = "search_meals_route"
 }
