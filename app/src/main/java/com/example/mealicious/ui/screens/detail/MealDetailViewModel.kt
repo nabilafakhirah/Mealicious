@@ -4,18 +4,23 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.mealicious.data.model.MealDetail
 import com.example.mealicious.data.repository.MealRepository
+import com.example.mealicious.data.repository.MealStorageRepository
 import com.example.mealicious.ui.screens.category.CategoryState
 import com.example.mealicious.util.DataResult
 import com.example.mealicious.util.mealDetailMapper
+import com.example.mealicious.util.mealEntityMapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MealDetailViewModel @Inject constructor(
     private val mealRepository: MealRepository,
+    private val mealStorageRepository: MealStorageRepository,
 ): ViewModel() {
 
     private val _state = mutableStateOf(MealDetailState())
@@ -51,5 +56,10 @@ class MealDetailViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun saveMealToBookmark(mealDetail: MealDetail) = viewModelScope.launch {
+        val mealEntity = mealDetail.mealEntityMapper()
+        mealStorageRepository.addMeal(mealEntity)
     }
 }

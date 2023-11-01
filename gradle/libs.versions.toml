@@ -22,6 +22,7 @@ coroutine = "1.5.2"
 google-play-service = "19.2.0"
 shared-preference = "1.0.0"
 youtube-player = "11.1.0"
+gson = "2.8.8"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -64,6 +65,7 @@ coroutine = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-androi
 play-service-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "google-play-service"}
 shared-preference = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "shared-preference" }
 youtube-player = { group = "com.pierfrancescosoffritti.androidyoutubeplayer", name = "core", version.ref = "youtube-player" }
+gson = { group = "com.google.code.gson", name ="gson", version.ref = "gson" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

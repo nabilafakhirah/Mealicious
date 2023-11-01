@@ -9,6 +9,6 @@ data class MealDetail(
     val strMealThumb: String,
     val strTags: String?,
     val strYoutube: String?,
-    val ingredientsMeasurements: List<Pair<String, String>>,
+    val ingredientsMeasurements: List<String>,
     val strSource: String?,
 )

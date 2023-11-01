@@ -1,4 +1,4 @@
-package com.example.mealicious.ui.screens.detail
+package com.example.mealicious.ui.screens.bookmarkdetail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,25 +9,29 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.mealicious.ui.widget.MealDetailView
 import com.example.mealicious.ui.theme.mustard
+import com.example.mealicious.ui.widget.MealDetailView
 import com.example.mealicious.ui.widget.TopBarView
+import com.example.mealicious.util.mealDetailMapper
 
 @Composable
-fun MealDetailScreen(
-    mealId: String,
+fun BookmarkDetailScreen(
+    idMeal: String,
     navController: NavController,
     modifier: Modifier = Modifier,
-    viewModel: MealDetailViewModel = hiltViewModel()
+    viewModel: BookmarkDetailViewModel = hiltViewModel()
 ) {
     LaunchedEffect(key1 = true) {
-        viewModel.getMealDetail(mealId)
+        viewModel.getBookmarkDetail(idMeal)
     }
-    val state = viewModel.state
+    val bookmarkFlow = viewModel.state.value.mealDetail
+    val mealEntity by bookmarkFlow.collectAsState(initial = emptyList())
     Scaffold(
         topBar = {
             TopBarView(
@@ -43,18 +47,12 @@ fun MealDetailScreen(
                 .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 60.dp)
                 .verticalScroll(rememberScrollState()),
         ) {
-            if (state.value.isLoading) {
-                CircularProgressIndicator(
-                    color = mustard
-                )
-            }
-            val meal = state.value.mealDetail
-            if (meal != null) {
+            if (mealEntity.isNotEmpty()) {
+                val mealDetail = mealEntity.first().mealDetailMapper()
                 MealDetailView(
-                    meal = meal,
-                    onClickAction = {
-                        viewModel.saveMealToBookmark(meal)
-                    }
+                    meal = mealDetail,
+                    isBookmark = true,
+                    onClickAction = {}
                 )
             }
         }

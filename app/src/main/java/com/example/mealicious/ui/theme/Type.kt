@@ -33,6 +33,13 @@ val Typography = androidx.compose.material.Typography(
         textDecoration = TextDecoration.Underline,
         fontSize = 14.sp,
     ),
+    caption = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Bold,
+        textDecoration = TextDecoration.Underline,
+        color = mustard,
+        fontSize = 14.sp,
+    ),
     h5 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.ExtraBold,

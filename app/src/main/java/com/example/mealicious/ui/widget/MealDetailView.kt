@@ -1,5 +1,6 @@
-package com.example.mealicious.ui.screens.detail.widget
+package com.example.mealicious.ui.widget
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,7 +11,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import com.example.mealicious.R
 import com.example.mealicious.data.model.MealDetail
@@ -21,6 +21,8 @@ import java.net.URI
 @Composable
 fun MealDetailView(
     meal: MealDetail,
+    isBookmark: Boolean = false,
+    onClickAction: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -35,6 +37,17 @@ fun MealDetailView(
             error = painterResource(id = R.drawable.img_by_category),
             contentDescription = "",
         )
+        if (!isBookmark) {
+            Text(
+                modifier = Modifier
+                    .padding(top = 4.dp)
+                    .clickable {
+                        onClickAction()
+                    },
+                text = stringResource(id = R.string.add_to_bookmark),
+                style = Typography.caption
+            )
+        }
         Text(
             modifier = Modifier.padding(top = 16.dp),
             text = meal.strMeal,
@@ -46,11 +59,10 @@ fun MealDetailView(
             style = Typography.subtitle2
         )
         meal.ingredientsMeasurements.forEach {
-            if (it.first != null) {
-                IngredientItemView(
-                    ingredient = it.first,
-                    measurement = it.second)
-            }
+            Text(
+                text = it,
+                style = Typography.body2
+            )
         }
         Text(
             modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
@@ -61,7 +73,7 @@ fun MealDetailView(
             text = meal.strInstructions,
             style = Typography.body2
         )
-        if (meal.strYoutube != null && meal.strYoutube.isNotEmpty()) {
+        if (!meal.strYoutube.isNullOrEmpty()) {
             Text(
                 modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
                 text = stringResource(id = R.string.video),

@@ -1,4 +1,4 @@
-package com.example.mealicious.ui.screens.detail.widget
+package com.example.mealicious.ui.widget
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
