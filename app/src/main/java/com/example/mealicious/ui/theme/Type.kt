@@ -15,6 +15,12 @@ val Typography = androidx.compose.material.Typography(
         fontSize = 14.sp,
         letterSpacing = 0.sp
     ),
+    body2 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        letterSpacing = 0.sp
+    ),
     subtitle1 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.ExtraBold,
@@ -25,8 +31,7 @@ val Typography = androidx.compose.material.Typography(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Bold,
         textDecoration = TextDecoration.Underline,
-        color = Color.Blue,
-        fontSize = 16.sp,
+        fontSize = 14.sp,
     ),
     h5 = TextStyle(
         fontFamily = FontFamily.Default,

@@ -63,7 +63,12 @@ fun MealsByCategoryScreen(
             MealsListView(
                 mealsList = state.value.mealsList,
                 onClickItem = {
-                    // to do
+                    navController.navigate(
+                        "${Destinations.MEAL_DETAIL_ROUTE}/{mealId}".replace(
+                            oldValue = "{mealId}",
+                            newValue = it
+                        )
+                    )
                 }
             )
         }

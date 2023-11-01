@@ -7,8 +7,8 @@ data class MealDetail(
     val strArea: String,
     val strInstructions: String,
     val strMealThumb: String,
-    val strTags: String,
-    val strYoutube: String,
+    val strTags: String?,
+    val strYoutube: String?,
     val ingredientsMeasurements: List<Pair<String, String>>,
-    val strSource: String,
+    val strSource: String?,
 )

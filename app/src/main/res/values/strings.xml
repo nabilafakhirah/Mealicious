@@ -4,4 +4,7 @@
     <string name="by_area">By Area</string>
     <string name="by_category">By Category</string>
     <string name="what_to_cook_today">What to cook today?</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="how_to_make">How to Make</string>
+    <string name="video">Video</string>
 </resources>

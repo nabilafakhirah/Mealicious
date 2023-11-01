@@ -96,5 +96,6 @@ dependencies {
     implementation(libs.room.runtime)
     implementation(libs.room.common)
     implementation(libs.room.ktx)
+    implementation(libs.youtube.player)
     kapt(libs.room.compiler)
 }

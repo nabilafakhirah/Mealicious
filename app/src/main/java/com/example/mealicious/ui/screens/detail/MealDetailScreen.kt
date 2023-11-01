@@ -1,32 +1,31 @@
-package com.example.mealicious.ui.screens.search
+package com.example.mealicious.ui.screens.detail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.mealicious.ui.navigation.Destinations
+import com.example.mealicious.ui.screens.detail.widget.MealDetailView
 import com.example.mealicious.ui.theme.mustard
-import com.example.mealicious.ui.widget.MealsListView
-import com.example.mealicious.ui.widget.SearchBarView
 import com.example.mealicious.ui.widget.TopBarView
 
 @Composable
-fun SearchMealScreen(
-    name: String,
+fun MealDetailScreen(
+    mealId: String,
     navController: NavController,
     modifier: Modifier = Modifier,
-    viewModel: SearchMealViewModel = hiltViewModel()
+    viewModel: MealDetailViewModel = hiltViewModel()
 ) {
     LaunchedEffect(key1 = true) {
-        viewModel.searchMeals(name)
+        viewModel.getMealDetail(mealId)
     }
     val state = viewModel.state
     Scaffold(
@@ -41,31 +40,18 @@ fun SearchMealScreen(
         Column(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(bottom = 16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(top = 16.dp, start = 16.dp, end = 16.dp, bottom = 60.dp)
+                .verticalScroll(rememberScrollState()),
         ) {
-            SearchBarView(
-                modifier = Modifier.padding(top = 16.dp),
-                onSearch = {
-                    viewModel.searchMeals(it)
-                }
-            )
             if (state.value.isLoading) {
                 CircularProgressIndicator(
                     color = mustard
                 )
             }
-            MealsListView(
-                mealsList = state.value.mealsList,
-                onClickItem = {
-                    navController.navigate(
-                        "${Destinations.MEAL_DETAIL_ROUTE}/{mealId}".replace(
-                            oldValue = "{mealId}",
-                            newValue = it
-                        )
-                    )
-                }
-            )
+            val meal = state.value.mealDetail
+            if (meal != null) {
+                MealDetailView(meal = meal)
+            }
         }
     }
 }
