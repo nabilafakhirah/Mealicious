@@ -14,10 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.example.mealicious.ui.navigation.Destinations.MEALS_BY_AREA_ROUTE
 import com.example.mealicious.ui.navigation.Destinations.MEALS_BY_CATEGORY_ROUTE
 import com.example.mealicious.ui.theme.mustard
 import com.example.mealicious.ui.widget.CategoryItemView
+import com.example.mealicious.ui.widget.SearchBarView
 import com.example.mealicious.ui.widget.TopBarView
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -43,6 +43,12 @@ fun CategoryScreen(
                 .padding(bottom = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            SearchBarView(
+                modifier = Modifier.padding(top = 16.dp),
+                onSearch = {
+
+                }
+            )
             if (state.value.isLoading) {
                 CircularProgressIndicator(
                     color = mustard
@@ -52,9 +58,9 @@ fun CategoryScreen(
                 cells = GridCells.Fixed(2),
             ) {
                 items(state.value.categoryList.size) { index ->
-                    val areaName = state.value.categoryList[index]
+                    val categoryName = state.value.categoryList[index]
                     CategoryItemView(
-                        text = areaName.strCategory,
+                        text = categoryName.strCategory,
                         onClick = {
                             navController.navigate(
                                 "${MEALS_BY_CATEGORY_ROUTE}/{category}".replace(
