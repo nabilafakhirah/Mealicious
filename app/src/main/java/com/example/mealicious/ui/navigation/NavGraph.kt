@@ -4,7 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.mealicious.ui.navigation.Destinations.AREA_LIST_ROUTE
+import com.example.mealicious.ui.navigation.Destinations.CATEGORY_LIST_ROUTE
 import com.example.mealicious.ui.navigation.Destinations.RECIPE_HOME_ROUTE
+import com.example.mealicious.ui.screens.area.AreaScreen
+import com.example.mealicious.ui.screens.category.CategoryScreen
 import com.example.mealicious.ui.screens.home.HomeScreen
 
 @Composable
@@ -16,7 +20,15 @@ fun NavGraph(
         startDestination = RECIPE_HOME_ROUTE
     ) {
         composable(RECIPE_HOME_ROUTE) {
-            HomeScreen()
+            HomeScreen(
+                navController = navController
+            )
+        }
+        composable(AREA_LIST_ROUTE) {
+            AreaScreen(navController = navController)
+        }
+        composable(CATEGORY_LIST_ROUTE) {
+            CategoryScreen(navController = navController)
         }
     }
 
@@ -25,4 +37,8 @@ fun NavGraph(
 object Destinations {
     const val RECIPE_HOME_ROUTE = "recipe_home_route"
     const val BOOKMARK_HOME_ROUTE = "bookmark_home_route"
+    const val AREA_LIST_ROUTE = "area_list_route"
+    const val CATEGORY_LIST_ROUTE = "category_list_route"
+    const val MEALS_BY_AREA_ROUTE = "meals_by_area_route"
+    const val MEALS_BY_CATEGORY_ROUTE = "meals_by_category_route"
 }
